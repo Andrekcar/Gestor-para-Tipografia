@@ -1,7 +1,7 @@
 # Gestor para Tipografía
 
 Aplicación de escritorio para gestión de pedidos de diseño e impresión.
-
+ 
 ## Tecnologías
 - Python
 - PySide6
@@ -9,7 +9,8 @@ Aplicación de escritorio para gestión de pedidos de diseño e impresión.
 
 ## Instalación rápida (Windows)
 
-Descargá el archivo `lanzador.bat` y con un simple **doble clic**. El script automáticamente:
+Descargá el archivo `Lanzador.bat` muevelo a una carpeta nueva en tu escritorio y con un simple **doble clic**. El script automáticamente:
+
 - Clona el repositorio
 - Crea el entorno virtual
 - Instala las dependencias
