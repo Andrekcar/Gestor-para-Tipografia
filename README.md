@@ -36,7 +36,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Uso
+## Lanzar
 ```bash
 python main.py
 ```
