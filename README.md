@@ -7,7 +7,18 @@ Aplicación de escritorio para gestión de pedidos de diseño e impresión.
 - PySide6
 - SQLite
 
-## Instalación
+## Instalación rápida (Windows)
+
+Descargá el archivo `lanzador.bat` y con un simple **doble clic**. El script automáticamente:
+- Clona el repositorio
+- Crea el entorno virtual
+- Instala las dependencias
+- Lanza la aplicación
+
+> Puedes usar el lanzador repetidas veces, despues de la 1ra ejecución ya no se creara ni clonara nuevamente el proyecto y el entorno virtual, por lo puede usarse como lanzador principal
+> Requiere tener **Python** y **Git** instalados en el sistema.
+
+## Instalación manual
 
 1. Clonar el repositorio
 ```bash
@@ -31,25 +42,3 @@ python main.py
 ```
 
 ## Estructura
-```
-📁 Gestor-para-Tipografia/
-├── main.py
-├── tipografia.db
-├── .gitignore
-├── app/
-│   ├── assets/
-│   │   └── coreldraw.png
-│   ├── database/
-│   │   ├── __init__.py
-│   │   └── db.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── #
-│   │   └── pedido_repository.py
-│   └── views/
-│       ├── ui/
-│       │   ├── main_window.ui
-│       │   └── ui_main_window.py
-│       ├── #
-│       └── main_window.py
-```
