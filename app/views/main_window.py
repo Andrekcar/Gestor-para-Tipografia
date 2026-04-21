@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.models.pedido_repository import Pedido, PedidoRepository
-from app.views.clientes_page import ClientesPage
+#from app.views.clientes_page import ClientesPage
 from app.views.ui.ui_main_window import Ui_MainWindow
 
 # Ruta al icono de Corel dentro del proyecto
@@ -133,16 +133,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 )
 
     def _configurar_navegacion(self):
-        self._clientes_page = ClientesPage()
-        self.horizontalLayout_3.addWidget(self._clientes_page)
-        self._clientes_page.hide()   # empieza oculta, pedidos es la vista inicial
+        #self._clientes_page = ClientesPage()
+        #self.horizontalLayout_3.addWidget(self._clientes_page)
+        #self._clientes_page.hide()   # empieza oculta, pedidos es la vista inicial
         self.toolButtonPedidos.clicked.connect(self._mostrar_pedidos)
         self.toolButtonClientes.clicked.connect(self._mostrar_clientes)
 
     def _mostrar_pedidos(self):
         self.frame_pedidos.show()  
         self.frame_detalle.show()
-        self._clientes_page.hide() # oculta la pagina de clientes
+        #self._clientes_page.hide()
         self.labelTitulo.setText("Gestor de Pedidos")
 
     def _mostrar_clientes(self):
