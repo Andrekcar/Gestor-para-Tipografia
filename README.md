@@ -41,4 +41,4 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## Estructura
+## Estru
