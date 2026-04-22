@@ -16,7 +16,7 @@ from PySide6.QtCore import Qt, QRectF
 from PySide6.QtGui import QIcon, QPainter, QColor
 from PySide6.QtWidgets import (
     QMainWindow, QTableWidgetItem, QHeaderView, QPushButton, QFileDialog,
-    QStyledItemDelegate, QStyle, QComboBox, QSizePolicy,
+    QStyledItemDelegate, QStyle, QComboBox, QSizePolicy
 )
 
 from app.models.pedido_repository import Pedido, PedidoRepository
@@ -307,11 +307,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             pedido = self._repo.get_by_id(pedido_id)
             if pedido:
                 pedido.estado = nuevo
+                # Logica para capturar la hora de entrega segun estado
+                if nuevo == "Entregado" and not pedido.fecha_entrega:
+                    pedido.fecha_entrega = date.today().isoformat()
                 self._repo.update(pedido)
+                self._refrescar_tabla()
+  
             if self._pedido_actual and self._pedido_actual.id == pedido_id:
                 self._pedido_actual.estado = nuevo
                 self._seleccionar_badge(nuevo)
-
+                self._refrescar_tabla()
+                
         combo.currentTextChanged.connect(_on_cambio)
         return combo
 
