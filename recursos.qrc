@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>app/assets/coreldraw.png</file>
+        <file>app/assets/nueva-cuenta.png</file>
+        <file>app/assets/pedido.png</file>
+    </qresource>
+</RCC>
