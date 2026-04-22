@@ -143,8 +143,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-clientes_page.py
-cliente_repository.py
+
 
 # Spyder project settings
 .spyderproject

@@ -63,14 +63,16 @@ class Ui_MainWindow(object):
         self.toolButtonClientes.setGeometry(QRect(20, 100, 211, 41))
         self.toolButtonClientes.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
 "border-color: rgb(255, 255, 255);")
-        self.labelLogo = QLabel(self.sidebar)
-        self.labelLogo.setObjectName(u"labelLogo")
-        self.labelLogo.setGeometry(QRect(10, 10, 60, 60))
-        self.labelLogo.setMinimumSize(QSize(60, 60))
-        self.labelLogo.setMaximumSize(QSize(50, 50))
-        self.labelLogo.setSizeIncrement(QSize(0, 0))
-        self.labelLogo.setPixmap(QPixmap(u"../../../../supabase-files/logo.png"))
-        self.labelLogo.setScaledContents(True)
+        self.label = QLabel(self.sidebar)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(40, 100, 41, 41))
+        self.label.setPixmap(QPixmap(u":/app/assets/nueva-cuenta.png"))
+        self.label.setScaledContents(True)
+        self.label_2 = QLabel(self.sidebar)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(40, 150, 41, 41))
+        self.label_2.setPixmap(QPixmap(u":/app/assets/pedido.png"))
+        self.label_2.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.sidebar)
 
@@ -97,7 +99,7 @@ class Ui_MainWindow(object):
         self.header.setLineWidth(0)
         self.labelTitulo = QLabel(self.header)
         self.labelTitulo.setObjectName(u"labelTitulo")
-        self.labelTitulo.setGeometry(QRect(30, 10, 181, 61))
+        self.labelTitulo.setGeometry(QRect(40, 10, 181, 61))
         self.labelTitulo.setStyleSheet(u"color: rgb(0, 0, 0);\n"
 "font: 700 15pt \"Segoe UI\";\n"
 "\n"
@@ -125,72 +127,80 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.frameFiltro = QFrame(self.frame_pedidos)
         self.frameFiltro.setObjectName(u"frameFiltro")
-        self.frameFiltro.setMinimumSize(QSize(0, 42))
-        self.frameFiltro.setMaximumSize(QSize(16777215, 42))
+        self.frameFiltro.setFixedHeight(42)
         self.frameFiltro.setAutoFillBackground(False)
-        self.frameFiltro.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"background-color: transparent;\n"
-"border: none;\n"
-"border-radius: 5px;")
+        self.frameFiltro.setStyleSheet(u"background-color: transparent;\nborder: none;\nborder-radius: 5px;")
         self.frameFiltro.setFrameShape(QFrame.Shape.NoFrame)
         self.frameFiltro.setFrameShadow(QFrame.Shadow.Plain)
         self.frameFiltro.setLineWidth(0)
-        self.comboBoxCliente = QComboBox(self.frameFiltro)
+
+        filtro_hlay = QHBoxLayout(self.frameFiltro)
+        filtro_hlay.setContentsMargins(0, 0, 0, 0)
+        filtro_hlay.setSpacing(8)
+
+        self.comboBoxCliente = QComboBox()
         self.comboBoxCliente.setObjectName(u"comboBoxCliente")
-        self.comboBoxCliente.setGeometry(QRect(20, 0, 171, 41))
-        self.comboBoxCliente.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgba(1, 1, 1, 50);")
-        self.comboBoxTrabajo = QComboBox(self.frameFiltro)
+        self.comboBoxCliente.setFixedSize(QSize(171, 41))
+        self.comboBoxCliente.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+        self.comboBoxTrabajo = QComboBox()
         self.comboBoxTrabajo.setObjectName(u"comboBoxTrabajo")
-        self.comboBoxTrabajo.setGeometry(QRect(200, 0, 121, 41))
-        self.comboBoxTrabajo.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgba(1, 1, 1, 50);")
-        self.comboBoxEstado = QComboBox(self.frameFiltro)
+        self.comboBoxTrabajo.setFixedSize(QSize(121, 41))
+        self.comboBoxTrabajo.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+        self.comboBoxEstado = QComboBox()
         self.comboBoxEstado.addItem("")
         self.comboBoxEstado.addItem("")
         self.comboBoxEstado.addItem("")
         self.comboBoxEstado.setObjectName(u"comboBoxEstado")
-        self.comboBoxEstado.setGeometry(QRect(330, 0, 121, 41))
-        self.comboBoxEstado.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgba(1, 1, 1, 50);")
-        self.dateEdit = QDateEdit(self.frameFiltro)
+        self.comboBoxEstado.setFixedSize(QSize(121, 41))
+        self.comboBoxEstado.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+        self.dateEdit = QDateEdit()
         self.dateEdit.setObjectName(u"dateEdit")
-        self.dateEdit.setGeometry(QRect(480, 0, 121, 41))
-        self.dateEdit.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgba(1, 1, 1, 50);")
-        self.dateEdit2 = QDateEdit(self.frameFiltro)
+        self.dateEdit.setFixedSize(QSize(121, 41))
+        self.dateEdit.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+        self.dateEdit2 = QDateEdit()
         self.dateEdit2.setObjectName(u"dateEdit2")
-        self.dateEdit2.setGeometry(QRect(610, 0, 121, 41))
-        self.dateEdit2.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgba(1, 1, 1, 50);")
-        self.toolButtonBuscar = QToolButton(self.frameFiltro)
+        self.dateEdit2.setFixedSize(QSize(121, 41))
+        self.dateEdit2.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+        self.toolButtonBuscar = QToolButton()
         self.toolButtonBuscar.setObjectName(u"toolButtonBuscar")
-        self.toolButtonBuscar.setGeometry(QRect(750, 0, 91, 41))
-        self.toolButtonBuscar.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
-"background-color: rgb(29, 140, 160);\n"
-"color: rgb(255, 255, 255);")
+        self.toolButtonBuscar.setFixedSize(QSize(91, 41))
+        self.toolButtonBuscar.setStyleSheet(u"font: 13pt \"Segoe UI\";\nbackground-color: rgb(29, 140, 160);\ncolor: rgb(255, 255, 255);")
+
+        filtro_hlay.addWidget(self.comboBoxCliente)
+        filtro_hlay.addWidget(self.comboBoxTrabajo)
+        filtro_hlay.addWidget(self.comboBoxEstado)
+        filtro_hlay.addWidget(self.dateEdit)
+        filtro_hlay.addWidget(self.dateEdit2)
+        filtro_hlay.addStretch()
+        filtro_hlay.addWidget(self.toolButtonBuscar)
 
         self.verticalLayout_2.addWidget(self.frameFiltro)
 
         self.frameTabla = QFrame(self.frame_pedidos)
         self.frameTabla.setObjectName(u"frameTabla")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frameTabla.sizePolicy().hasHeightForWidth())
         self.frameTabla.setSizePolicy(sizePolicy)
-        self.frameTabla.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border: 1px solid rgba(1, 1, 1, 50);\n"
-"border-radius: 10px;")
+        self.frameTabla.setStyleSheet(u"background-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);\nborder-radius: 10px;")
         self.frameTabla.setFrameShape(QFrame.Shape.NoFrame)
         self.frameTabla.setFrameShadow(QFrame.Shadow.Plain)
         self.frameTabla.setLineWidth(0)
-        self.tableWidget = QTableWidget(self.frameTabla)
+
+        tabla_vlay = QVBoxLayout(self.frameTabla)
+        tabla_vlay.setContentsMargins(9, 9, 9, 9)
+        tabla_vlay.setSpacing(6)
+
+        header_hlay = QHBoxLayout()
+        header_hlay.addStretch()
+        self.toolButtonAdd = QToolButton()
+        self.toolButtonAdd.setObjectName(u"toolButtonAdd")
+        self.toolButtonAdd.setFixedSize(QSize(161, 41))
+        self.toolButtonAdd.setStyleSheet(u"font: 13pt \"Segoe UI\";\nbackground-color: rgb(29, 140, 160);\ncolor: rgb(255, 255, 255);\nborder-radius: 5px;")
+        header_hlay.addWidget(self.toolButtonAdd)
+        tabla_vlay.addLayout(header_hlay)
+
+        self.tableWidget = QTableWidget()
         if (self.tableWidget.columnCount() < 6):
             self.tableWidget.setColumnCount(6)
         __qtablewidgetitem = QTableWidgetItem()
@@ -206,25 +216,15 @@ class Ui_MainWindow(object):
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setGeometry(QRect(20, 80, 821, 471))
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
         self.tableWidget.setSizePolicy(sizePolicy1)
-        self.tableWidget.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"font: 700 9pt \"Segoe UI\";\n"
-"border-radius: 3px;")
+        self.tableWidget.setStyleSheet(u"color: rgb(0, 0, 0);\nfont: 700 9pt \"Segoe UI\";\nborder-radius: 3px;")
         self.tableWidget.setGridStyle(Qt.PenStyle.SolidLine)
         self.tableWidget.setSortingEnabled(False)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
-        self.toolButtonAdd = QToolButton(self.frameTabla)
-        self.toolButtonAdd.setObjectName(u"toolButtonAdd")
-        self.toolButtonAdd.setGeometry(QRect(680, 20, 161, 41))
-        self.toolButtonAdd.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
-"background-color: rgb(29, 140, 160);\n"
-"color: rgb(255, 255, 255);\n"
-"border-radius: 5px;")
+        tabla_vlay.addWidget(self.tableWidget)
 
         self.verticalLayout_2.addWidget(self.frameTabla)
 
@@ -288,7 +288,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(221, 240, 244);")
         self.linePlantilla = QLineEdit(self.frame_detalle)
         self.linePlantilla.setObjectName(u"linePlantilla")
-        self.linePlantilla.setGeometry(QRect(30, 440, 251, 41))
+        self.linePlantilla.setGeometry(QRect(30, 440, 291, 41))
         self.linePlantilla.setStyleSheet(u"border-color: rgb(0, 89, 255);\n"
 "border: 1px solid rgba(1, 1, 1, 50);")
         self.lineEn_progreso = QLineEdit(self.frame_detalle)
@@ -315,14 +315,14 @@ class Ui_MainWindow(object):
 "font: 700 9pt \"Segoe UI\";")
         self.toolButtonGuardar = QToolButton(self.frame_detalle)
         self.toolButtonGuardar.setObjectName(u"toolButtonGuardar")
-        self.toolButtonGuardar.setGeometry(QRect(30, 560, 141, 41))
+        self.toolButtonGuardar.setGeometry(QRect(30, 610, 141, 41))
         self.toolButtonGuardar.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
 "background-color: rgb(29, 140, 160);\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius: 5px;")
         self.toolButtonEliminar = QToolButton(self.frame_detalle)
         self.toolButtonEliminar.setObjectName(u"toolButtonEliminar")
-        self.toolButtonEliminar.setGeometry(QRect(180, 560, 141, 41))
+        self.toolButtonEliminar.setGeometry(QRect(180, 610, 141, 41))
         self.toolButtonEliminar.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
@@ -344,7 +344,7 @@ class Ui_MainWindow(object):
 "font: 1000 13pt \"Segoe UI\";")
         self.pushButton_2 = QPushButton(self.frame_detalle)
         self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(286, 440, 35, 41))
+        self.pushButton_2.setGeometry(QRect(280, 450, 31, 21))
         self.pushButton_2.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);")
         self.lineCliente.raise_()
@@ -387,7 +387,8 @@ class Ui_MainWindow(object):
         self.labelNegocio.setText(QCoreApplication.translate("MainWindow", u"Grafic\u00e1s Boyac\u00e1", None))
         self.toolButtonPedidos.setText(QCoreApplication.translate("MainWindow", u"Pedidos", None))
         self.toolButtonClientes.setText(QCoreApplication.translate("MainWindow", u"Clientes", None))
-        self.labelLogo.setText("")
+        self.label.setText("")
+        self.label_2.setText("")
         self.labelTitulo.setText(QCoreApplication.translate("MainWindow", u"Gestor de Pedidos", None))
         self.comboBoxEstado.setItemText(0, QCoreApplication.translate("MainWindow", u"   No Iniciado", None))
         self.comboBoxEstado.setItemText(1, QCoreApplication.translate("MainWindow", u"   En Progreso", None))
@@ -421,6 +422,6 @@ class Ui_MainWindow(object):
         self.toolButtonGuardar.setText(QCoreApplication.translate("MainWindow", u"Guardar", None))
         self.toolButtonEliminar.setText(QCoreApplication.translate("MainWindow", u"Eliminar", None))
         self.label_Orden.setText(QCoreApplication.translate("MainWindow", u"Orden ID-01", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"X", None))
     # retranslateUi
 
