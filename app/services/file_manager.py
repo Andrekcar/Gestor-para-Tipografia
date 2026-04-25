@@ -25,7 +25,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-ESCRITORIO=Path(r"C:\Users\Camilo Caro\OneDrive\Escritorio")
+ESCRITORIO=Path("C:/Users/USER1/Desktop")
 CARPETA_PLANTILLAS="Plantillas Tipografia"
 CARPETA_DOCS="Docs Tipografia"
 
