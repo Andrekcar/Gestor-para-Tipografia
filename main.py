@@ -4,7 +4,6 @@ Punto de entrada principal.
 import sys
 import ctypes
 from pathlib import Path
-import recursos_rc
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 
