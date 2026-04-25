@@ -24,8 +24,8 @@ class PedidoRepository:
         #todos los pedidos ordenados por id.
         with get_connection() as conn:
             rows = conn.execute(
-                "SELECT * FROM pedidos ORDER BY id"
-            ).fetchall() # 
+                "SELECT * FROM pedidos ORDER BY id DESC"
+            ).fetchall()
         return [self._row_to_pedido(r) for r in rows] 
 
     def get_by_id(self, pedido_id: int) -> Optional[Pedido]: #
