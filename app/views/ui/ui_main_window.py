@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QFrame,
     QHBoxLayout, QHeaderView, QLabel, QLayout,
     QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
-    QSizePolicy, QTableWidget, QTableWidgetItem, QToolButton,
+    QSizePolicy, QSpinBox, QTableWidget, QTableWidgetItem, QToolButton,
     QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
@@ -48,6 +48,11 @@ class Ui_MainWindow(object):
         self.sidebar.setFrameShape(QFrame.Shape.NoFrame)
         self.sidebar.setFrameShadow(QFrame.Shadow.Plain)
         self.sidebar.setLineWidth(0)
+        self.label_logogb = QLabel(self.sidebar)
+        self.label_logogb.setObjectName(u"label_logogb")
+        self.label_logogb.setGeometry(QRect(10, 10, 60, 60))
+        self.label_logogb.setMinimumSize(QSize(60, 60))
+        self.label_logogb.setScaledContents(True)
         self.labelNegocio = QLabel(self.sidebar)
         self.labelNegocio.setObjectName(u"labelNegocio")
         self.labelNegocio.setGeometry(QRect(80, 10, 151, 61))
@@ -138,39 +143,47 @@ class Ui_MainWindow(object):
         filtro_hlay.setContentsMargins(0, 0, 0, 0)
         filtro_hlay.setSpacing(8)
 
+        # Filtro por cliente 
         self.comboBoxCliente = QComboBox()
         self.comboBoxCliente.setObjectName(u"comboBoxCliente")
         self.comboBoxCliente.setFixedSize(QSize(171, 41))
+        self.comboBoxCliente.setEditable(True)
+        self.comboBoxCliente.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
+        self.comboBoxCliente.setPlaceholderText("Cliente...")
         self.comboBoxCliente.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
-        self.comboBoxTrabajo = QComboBox()
-        self.comboBoxTrabajo.setObjectName(u"comboBoxTrabajo")
-        self.comboBoxTrabajo.setFixedSize(QSize(121, 41))
-        self.comboBoxTrabajo.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+
+        # Filtro por tipo de trabajo
+        self.lineEditTrabajo = QLineEdit()
+        self.lineEditTrabajo.setObjectName(u"lineEditTrabajo")
+        self.lineEditTrabajo.setFixedSize(QSize(141, 41))
+        self.lineEditTrabajo.setPlaceholderText("Tipo de trabajo...")
+        self.lineEditTrabajo.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+
+        # Filtro por estado
         self.comboBoxEstado = QComboBox()
-        self.comboBoxEstado.addItem("")
-        self.comboBoxEstado.addItem("")
-        self.comboBoxEstado.addItem("")
+        self.comboBoxEstado.addItem("Todos")
+        self.comboBoxEstado.addItem("No Iniciado")
+        self.comboBoxEstado.addItem("En Progreso")
+        self.comboBoxEstado.addItem("Entregado")
         self.comboBoxEstado.setObjectName(u"comboBoxEstado")
         self.comboBoxEstado.setFixedSize(QSize(121, 41))
         self.comboBoxEstado.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
-        self.dateEdit = QDateEdit()
-        self.dateEdit.setObjectName(u"dateEdit")
-        self.dateEdit.setFixedSize(QSize(121, 41))
-        self.dateEdit.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
-        self.dateEdit2 = QDateEdit()
-        self.dateEdit2.setObjectName(u"dateEdit2")
-        self.dateEdit2.setFixedSize(QSize(121, 41))
-        self.dateEdit2.setStyleSheet(u"color: rgb(0, 0, 0);\nbackground-color: rgb(255, 255, 255);\nborder: 1px solid rgba(1, 1, 1, 50);")
+
+        # Placeholder para el selector de rango de fechas
+        self.frame_fecha_rango = QFrame()
+        self.frame_fecha_rango.setObjectName(u"frame_fecha_rango")
+        self.frame_fecha_rango.setFixedSize(QSize(260, 41))
+        self.frame_fecha_rango.setFrameShape(QFrame.Shape.NoFrame)
+
         self.toolButtonBuscar = QToolButton()
         self.toolButtonBuscar.setObjectName(u"toolButtonBuscar")
         self.toolButtonBuscar.setFixedSize(QSize(91, 41))
         self.toolButtonBuscar.setStyleSheet(u"font: 13pt \"Segoe UI\";\nbackground-color: rgb(29, 140, 160);\ncolor: rgb(255, 255, 255);")
 
         filtro_hlay.addWidget(self.comboBoxCliente)
-        filtro_hlay.addWidget(self.comboBoxTrabajo)
+        filtro_hlay.addWidget(self.lineEditTrabajo)
         filtro_hlay.addWidget(self.comboBoxEstado)
-        filtro_hlay.addWidget(self.dateEdit)
-        filtro_hlay.addWidget(self.dateEdit2)
+        filtro_hlay.addWidget(self.frame_fecha_rango)
         filtro_hlay.addStretch()
         filtro_hlay.addWidget(self.toolButtonBuscar)
 
@@ -201,8 +214,8 @@ class Ui_MainWindow(object):
         tabla_vlay.addLayout(header_hlay)
 
         self.tableWidget = QTableWidget()
-        if (self.tableWidget.columnCount() < 6):
-            self.tableWidget.setColumnCount(6)
+        if (self.tableWidget.columnCount() < 7):
+            self.tableWidget.setColumnCount(7)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -215,6 +228,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(6, __qtablewidgetitem6)
         self.tableWidget.setObjectName(u"tableWidget")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
@@ -272,14 +287,30 @@ class Ui_MainWindow(object):
         self.label_Descripcion.setGeometry(QRect(30, 220, 71, 16))
         self.label_Descripcion.setStyleSheet(u"color: rgb(0, 0, 0);\n"
 "font: 700 9pt \"Segoe UI\";")
+        self.label_Und = QLabel(self.frame_detalle)
+        self.label_Und.setObjectName(u"label_Und")
+        self.label_Und.setGeometry(QRect(30, 360, 71, 16))
+        self.label_Und.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 700 9pt \"Segoe UI\";")
+        self.spinBoxUnd = QSpinBox(self.frame_detalle)
+        self.spinBoxUnd.setObjectName(u"spinBoxUnd")
+        self.spinBoxUnd.setGeometry(QRect(30, 370, 291, 40))
+        self.spinBoxUnd.setMinimum(1)
+        self.spinBoxUnd.setMaximum(99999)
+        self.spinBoxUnd.setValue(1)
+        self.spinBoxUnd.setStyleSheet(
+            u"QSpinBox { color: rgb(0, 0, 0); border: 1px solid rgba(1, 1, 1, 50); font: 9pt \"Segoe UI\"; }\n"
+            u"QSpinBox::up-button { width: 0; }\n"
+            u"QSpinBox::down-button { width: 0; }"
+        )
         self.label_Estado = QLabel(self.frame_detalle)
         self.label_Estado.setObjectName(u"label_Estado")
-        self.label_Estado.setGeometry(QRect(30, 360, 41, 16))
+        self.label_Estado.setGeometry(QRect(30, 423, 41, 16))
         self.label_Estado.setStyleSheet(u"color: rgb(0, 0, 0);\n"
 "font: 700 9pt \"Segoe UI\";")
         self.lineNo_iniciado = QLineEdit(self.frame_detalle)
         self.lineNo_iniciado.setObjectName(u"lineNo_iniciado")
-        self.lineNo_iniciado.setGeometry(QRect(30, 380, 91, 31))
+        self.lineNo_iniciado.setGeometry(QRect(30, 443, 91, 31))
         self.lineNo_iniciado.setStyleSheet(u"\n"
 "color: rgba(0, 0, 0, 0.7);\n"
 "\n"
@@ -288,12 +319,12 @@ class Ui_MainWindow(object):
 "background-color: rgb(221, 240, 244);")
         self.linePlantilla = QLineEdit(self.frame_detalle)
         self.linePlantilla.setObjectName(u"linePlantilla")
-        self.linePlantilla.setGeometry(QRect(30, 440, 291, 41))
+        self.linePlantilla.setGeometry(QRect(30, 500, 291, 41))
         self.linePlantilla.setStyleSheet(u"border-color: rgb(0, 89, 255);\n"
 "border: 1px solid rgba(1, 1, 1, 50);")
         self.lineEn_progreso = QLineEdit(self.frame_detalle)
         self.lineEn_progreso.setObjectName(u"lineEn_progreso")
-        self.lineEn_progreso.setGeometry(QRect(130, 380, 91, 31))
+        self.lineEn_progreso.setGeometry(QRect(130, 443, 91, 31))
         self.lineEn_progreso.setStyleSheet(u"\n"
 "color: rgba(0, 0, 0, 0.7);\n"
 "\n"
@@ -302,7 +333,7 @@ class Ui_MainWindow(object):
 "background-color: rgb(255, 243, 204);")
         self.lineEntregado = QLineEdit(self.frame_detalle)
         self.lineEntregado.setObjectName(u"lineEntregado")
-        self.lineEntregado.setGeometry(QRect(230, 380, 91, 31))
+        self.lineEntregado.setGeometry(QRect(230, 443, 91, 31))
         self.lineEntregado.setStyleSheet(u"\n"
 "color: rgba(0, 0, 0, 0.7);\n"
 "font: 700 9pt \"Segoe UI\";\n"
@@ -310,19 +341,19 @@ class Ui_MainWindow(object):
 "background-color: rgb(212, 245, 226);")
         self.label_Plantilla = QLabel(self.frame_detalle)
         self.label_Plantilla.setObjectName(u"label_Plantilla")
-        self.label_Plantilla.setGeometry(QRect(30, 430, 51, 16))
+        self.label_Plantilla.setGeometry(QRect(30, 490, 51, 16))
         self.label_Plantilla.setStyleSheet(u"color: rgb(0, 0, 0);\n"
 "font: 700 9pt \"Segoe UI\";")
         self.toolButtonGuardar = QToolButton(self.frame_detalle)
         self.toolButtonGuardar.setObjectName(u"toolButtonGuardar")
-        self.toolButtonGuardar.setGeometry(QRect(30, 610, 141, 41))
+        self.toolButtonGuardar.setGeometry(QRect(30, 590, 128, 41))
         self.toolButtonGuardar.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
 "background-color: rgb(29, 140, 160);\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius: 5px;")
         self.toolButtonEliminar = QToolButton(self.frame_detalle)
         self.toolButtonEliminar.setObjectName(u"toolButtonEliminar")
-        self.toolButtonEliminar.setGeometry(QRect(180, 610, 141, 41))
+        self.toolButtonEliminar.setGeometry(QRect(192, 590, 128, 41))
         self.toolButtonEliminar.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
 "color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
@@ -330,7 +361,7 @@ class Ui_MainWindow(object):
 "border-radius: 5px;")
         self.label_Orden = QLabel(self.frame_detalle)
         self.label_Orden.setObjectName(u"label_Orden")
-        self.label_Orden.setGeometry(QRect(30, 20, 101, 41))
+        self.label_Orden.setGeometry(QRect(30, 20, 200, 41))
         font = QFont()
         font.setFamilies([u"Segoe UI"])
         font.setPointSize(13)
@@ -344,7 +375,7 @@ class Ui_MainWindow(object):
 "font: 1000 13pt \"Segoe UI\";")
         self.pushButton_2 = QPushButton(self.frame_detalle)
         self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(280, 450, 31, 21))
+        self.pushButton_2.setGeometry(QRect(280, 510, 31, 21))
         self.pushButton_2.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "color: rgb(0, 0, 0);")
         self.lineCliente.raise_()
@@ -353,6 +384,8 @@ class Ui_MainWindow(object):
         self.label_Trabajo.raise_()
         self.plainTextDescripcion.raise_()
         self.label_Descripcion.raise_()
+        self.spinBoxUnd.raise_()
+        self.label_Und.raise_()
         self.label_Estado.raise_()
         self.lineNo_iniciado.raise_()
         self.linePlantilla.raise_()
@@ -390,30 +423,30 @@ class Ui_MainWindow(object):
         self.label.setText("")
         self.label_2.setText("")
         self.labelTitulo.setText(QCoreApplication.translate("MainWindow", u"Gestor de Pedidos", None))
-        self.comboBoxEstado.setItemText(0, QCoreApplication.translate("MainWindow", u"   No Iniciado", None))
-        self.comboBoxEstado.setItemText(1, QCoreApplication.translate("MainWindow", u"   En Progreso", None))
-        self.comboBoxEstado.setItemText(2, QCoreApplication.translate("MainWindow", u"   Entregado", None))
-
-#if QT_CONFIG(whatsthis)
-        self.comboBoxEstado.setWhatsThis(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>wer</p></body></html>", None))
-#endif // QT_CONFIG(whatsthis)
+        self.comboBoxEstado.setItemText(0, QCoreApplication.translate("MainWindow", u"Todos", None))
+        self.comboBoxEstado.setItemText(1, QCoreApplication.translate("MainWindow", u"No Iniciado", None))
+        self.comboBoxEstado.setItemText(2, QCoreApplication.translate("MainWindow", u"En Progreso", None))
+        self.comboBoxEstado.setItemText(3, QCoreApplication.translate("MainWindow", u"Entregado", None))
         self.toolButtonBuscar.setText(QCoreApplication.translate("MainWindow", u"Buscar", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Cliente", None))
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Tipo de Trabajo", None))
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Estado", None))
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Und", None))
         ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Fecha Solicitud", None))
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Estado", None))
         ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Fecha Entrega", None))
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Fecha Solicitud", None))
         ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Plantilla", None))
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Fecha Entrega", None))
+        ___qtablewidgetitem6 = self.tableWidget.horizontalHeaderItem(6)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Plantilla", None))
         self.toolButtonAdd.setText(QCoreApplication.translate("MainWindow", u"+ Nuevo Pedido", None))
         self.label_Cliente.setText(QCoreApplication.translate("MainWindow", u"Cliente", None))
         self.label_Trabajo.setText(QCoreApplication.translate("MainWindow", u"Tipo de Trabajo", None))
         self.label_Descripcion.setText(QCoreApplication.translate("MainWindow", u"Descripcion", None))
+        self.label_Und.setText(QCoreApplication.translate("MainWindow", u"Unidades", None))
         self.label_Estado.setText(QCoreApplication.translate("MainWindow", u"Estado", None))
         self.lineNo_iniciado.setText(QCoreApplication.translate("MainWindow", u"    No iniciado", None))
         self.lineEn_progreso.setText(QCoreApplication.translate("MainWindow", u"   En Progreso", None))
