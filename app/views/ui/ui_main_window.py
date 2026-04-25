@@ -57,18 +57,15 @@ class Ui_MainWindow(object):
         self.labelNegocio = QLabel(self.sidebar)
         self.labelNegocio.setObjectName(u"labelNegocio")
         self.labelNegocio.setGeometry(QRect(80, 10, 151, 61))
-        self.labelNegocio.setStyleSheet(u"\n"
-"font: 700 15pt \"Segoe UI\";\n"
-"")
+        self.labelNegocio.setStyleSheet(u"font: 700 15pt \"Segoe UI\"; color: rgb(255, 255, 255);")
         self.toolButtonPedidos = QToolButton(self.sidebar)
         self.toolButtonPedidos.setObjectName(u"toolButtonPedidos")
         self.toolButtonPedidos.setGeometry(QRect(20, 150, 211, 41))
-        self.toolButtonPedidos.setStyleSheet(u"font: 13pt \"Segoe UI\";")
+        self.toolButtonPedidos.setStyleSheet(u"font: 13pt \"Segoe UI\"; color: rgb(255, 255, 255); border: 2px solid rgb(255, 255, 255); border-radius: 6px;")
         self.toolButtonClientes = QToolButton(self.sidebar)
         self.toolButtonClientes.setObjectName(u"toolButtonClientes")
         self.toolButtonClientes.setGeometry(QRect(20, 100, 211, 41))
-        self.toolButtonClientes.setStyleSheet(u"font: 13pt \"Segoe UI\";\n"
-"border-color: rgb(255, 255, 255);")
+        self.toolButtonClientes.setStyleSheet(u"font: 13pt \"Segoe UI\"; color: rgb(255, 255, 255); border: 2px solid rgb(255, 255, 255); border-radius: 6px;")
         self.label = QLabel(self.sidebar)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(40, 100, 41, 41))
