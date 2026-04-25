@@ -1,12 +1,12 @@
 """
 Repositorio de clientes.
 
-Encapsula todas las operaciones SQL sobre la tabla 'clientes'.
+Operaciones SQL sobre la tabla clientes.
 """
 from dataclasses import dataclass
 from typing import Optional
-
 from app.database.db import get_connection
+
 
 @dataclass
 class Cliente:
@@ -19,7 +19,6 @@ class Cliente:
 
 
 class ClienteRepository:
-
     def get_all(self) -> list[Cliente]:
         with get_connection() as conn:
             rows = conn.execute(
