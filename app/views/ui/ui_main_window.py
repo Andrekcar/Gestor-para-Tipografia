@@ -8,6 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
+from pathlib import Path
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -71,12 +72,12 @@ class Ui_MainWindow(object):
         self.label = QLabel(self.sidebar)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(40, 100, 41, 41))
-        self.label.setPixmap(QPixmap(u":/app/assets/nueva-cuenta.png"))
+        self.label.setPixmap(QPixmap(str(Path(__file__).resolve().parents[2] / "assets" / "nueva-cuenta.png")))
         self.label.setScaledContents(True)
         self.label_2 = QLabel(self.sidebar)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(40, 150, 41, 41))
-        self.label_2.setPixmap(QPixmap(u":/app/assets/pedido.png"))
+        self.label_2.setPixmap(QPixmap(str(Path(__file__).resolve().parents[2] / "assets" / "pedido.png")))
         self.label_2.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.sidebar)
