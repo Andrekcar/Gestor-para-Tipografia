@@ -1,23 +1,22 @@
 """
 Conexion a la base de datos SQLite.
 
-sqlite3 viene incluido en Python, no requiere instalacion.
 La base de datos se crea automaticamente si no existe.
 """
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parents[2] / "tipografia.db"
+DB_PATH = Path(__file__).resolve().parents[2] / "tipografia.db" # ubicación de la base de datos 
 
-
+# Conexión 
 def get_connection() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
-
-def init_db() -> None:
+# Inicializa la base de datos
+def init_db():
     with get_connection() as conn:
         conn.executescript("""
             CREATE TABLE IF NOT EXISTS clientes (
@@ -37,6 +36,8 @@ def init_db() -> None:
                 estado          TEXT    NOT NULL DEFAULT 'No Iniciado',
                 fecha_solicitud TEXT             DEFAULT (date('now')),
                 fecha_entrega   TEXT             DEFAULT '',
-                plantilla       TEXT             DEFAULT ''
+                plantilla       TEXT             DEFAULT '',
+                unidades        INTEGER          DEFAULT 1
             );
         """)
+
