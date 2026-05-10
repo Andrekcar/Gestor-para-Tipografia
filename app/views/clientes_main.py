@@ -1,9 +1,8 @@
 from PySide6.QtCore import Qt, QStringListModel
-from PySide6.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHeaderView, QCompleter
+from PySide6.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QHeaderView, QCompleter, QMessageBox
 from app.models.cliente_repository import Cliente, ClienteRepository
 from app.services.file_manager import crear_carpeta_cliente
 from app.views.ui.ui_clientes_page import Ui_ClientesPage
-
 
 class ClientesPage(QWidget, Ui_ClientesPage):
     def __init__(self, parent=None):
@@ -68,6 +67,11 @@ class ClientesPage(QWidget, Ui_ClientesPage):
         if not nombre:
             return
 
+        exclude_id = self._cliente_actual.id if self._cliente_actual else None
+        if self._repo.exists_by_nombre(nombre, exclude_id):
+            QMessageBox.warning(self, "Cliente duplicado", f'Ya existe un cliente con el nombre "{nombre}".')
+            return
+
         datos = dict(
             nombre=nombre,
             telefono=self.lineTelefono.text().strip(),
@@ -88,6 +92,13 @@ class ClientesPage(QWidget, Ui_ClientesPage):
 
     def _on_eliminar(self):
         if self._cliente_actual is None:
+            return
+        respuesta = QMessageBox.question(
+            self, "Eliminar cliente",
+            f"¿Eliminar a {self._cliente_actual.nombre}?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+        if respuesta != QMessageBox.StandardButton.Yes:
             return
         self._repo.delete(self._cliente_actual.id)
         self._cliente_actual = None
