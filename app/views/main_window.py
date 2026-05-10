@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
     QMainWindow, QTableWidgetItem, QHeaderView, QPushButton, QFileDialog,
     QStyledItemDelegate, QStyle, QComboBox, QSizePolicy, QCompleter,
     QDialog, QCalendarWidget, QVBoxLayout, QHBoxLayout, QLabel, QWidget,
-    QLineEdit
+    QLineEdit, QMessageBox
 )
 
 from app.models.pedido_repository import Pedido, PedidoRepository
@@ -593,6 +593,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self._pedido_actual is None:
             self.statusBar().showMessage("Selecciona un pedido para eliminar.", 3000)
             return
+        respuesta = QMessageBox.question(
+            self, "Eliminar pedido",
+            f"¿Eliminar el pedido de {self._pedido_actual.cliente}?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+        if respuesta != QMessageBox.StandardButton.Yes:
+            return
         self._repo.delete(self._pedido_actual.id)
         nombre = self._pedido_actual.cliente
         self._pedido_actual = None
@@ -788,3 +795,4 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # Oculta por defecto los pedidos entregados; se revelan filtrando por estado
             if pedido.estado == "Entregado":
                 self.tableWidget.setRowHidden(row, True)
+
