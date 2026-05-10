@@ -59,6 +59,18 @@ class ClienteRepository:
                 cliente.id,
             ))
 
+    def exists_by_nombre(self, nombre: str, exclude_id: int | None = None) -> bool:
+        with get_connection() as conn:
+            if exclude_id is None:
+                row = conn.execute(
+                    "SELECT 1 FROM clientes WHERE LOWER(nombre)=LOWER(?) LIMIT 1", (nombre,)
+                ).fetchone()
+            else:
+                row = conn.execute(
+                    "SELECT 1 FROM clientes WHERE LOWER(nombre)=LOWER(?) AND id!=? LIMIT 1", (nombre, exclude_id)
+                ).fetchone()
+        return row is not None
+
     def delete(self, cliente_id: int) -> None:
         with get_connection() as conn:
             conn.execute("DELETE FROM clientes WHERE id = ?", (cliente_id,))
